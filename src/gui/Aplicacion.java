@@ -7,16 +7,10 @@ package gui;
 
 import bd.Data;
 import bd.DatosConexion;
-import java.awt.BorderLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -54,6 +48,7 @@ public class Aplicacion extends javax.swing.JFrame {
         txtSentencia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSentenciaKeyReleased(evt);
+                contarCaracteres(evt);
             }
         });
 
@@ -100,7 +95,19 @@ public class Aplicacion extends javax.swing.JFrame {
         panelSyntax = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        imGeneradorInsert = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
 
         jTabla.setMinimumSize(new java.awt.Dimension(451, 192));
 
@@ -292,18 +299,55 @@ public class Aplicacion extends javax.swing.JFrame {
         lblContarCaracteres.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblContarCaracteres.setText("0");
 
-        panelSyntax.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                panelSyntaxKeyReleased(evt);
-            }
-        });
         panelSyntax.setLayout(new java.awt.BorderLayout());
 
-        jMenu1.setText("File");
+        jMenu1.setText("Archivo");
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevoArchivo.png"))); // NOI18N
+        jMenuItem1.setText("Nuevo");
+        jMenu1.add(jMenuItem1);
+        jMenu1.add(jSeparator1);
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/abrirArchivo.png"))); // NOI18N
+        jMenuItem2.setText("Abrir...");
+        jMenu1.add(jMenuItem2);
+        jMenu1.add(jSeparator2);
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardarArchivo.png"))); // NOI18N
+        jMenuItem3.setText("Guardar");
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardarArchivo.png"))); // NOI18N
+        jMenuItem4.setText("Guardar como...");
+        jMenu1.add(jMenuItem4);
+        jMenu1.add(jSeparator3);
+
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
+        jMenuItem5.setText("Salir");
+        jMenu1.add(jMenuItem5);
+
         menuBar.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu3.setText("Editar");
+        menuBar.add(jMenu3);
+
+        jMenu2.setText("Herramientas");
+
+        imGeneradorInsert.setText("Generador Insert");
+        imGeneradorInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imGeneradorInsertActionPerformed(evt);
+            }
+        });
+        jMenu2.add(imGeneradorInsert);
+
         menuBar.add(jMenu2);
+
+        jMenu4.setText("Ejecutar");
+        menuBar.add(jMenu4);
+
+        jMenu5.setText("Ayuda");
+        menuBar.add(jMenu5);
 
         setJMenuBar(menuBar);
 
@@ -420,10 +464,6 @@ public class Aplicacion extends javax.swing.JFrame {
         cargarComboBDDespues();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void panelSyntaxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelSyntaxKeyReleased
-
-    }//GEN-LAST:event_panelSyntaxKeyReleased
-
     private void treeBDMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_treeBDMouseReleased
         if (evt.getClickCount() == 2) {
                 TreePath[] paths = treeBD.getSelectionPaths();
@@ -443,11 +483,14 @@ public class Aplicacion extends javax.swing.JFrame {
                         Logger.getLogger(Aplicacion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                
-                
         }
     }//GEN-LAST:event_treeBDMouseReleased
 
+    private void imGeneradorInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imGeneradorInsertActionPerformed
+        String[] args = null;
+        Aplication.main(args);
+    }//GEN-LAST:event_imGeneradorInsertActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -481,6 +524,7 @@ public class Aplicacion extends javax.swing.JFrame {
     private javax.swing.JButton btnSQLServer;
     private javax.swing.JButton btnUsarBD;
     private javax.swing.JComboBox cboBD;
+    private javax.swing.JMenuItem imGeneradorInsert;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -489,11 +533,22 @@ public class Aplicacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JFrame jPortada;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JFrame jTabla;
     private javax.swing.JLabel lblContarCaracteres;
     private javax.swing.JMenuBar menuBar;
@@ -713,7 +768,7 @@ public class Aplicacion extends javax.swing.JFrame {
         }
     }
 
-    private void contarCaracteres() {
+    private void contarCaracteres(java.awt.event.KeyEvent evt) {
 //        System.out.println(txtSentencia.getText().length());
         lblContarCaracteres.setText(Integer.toString(txtSentencia.getText().length()));
     }
