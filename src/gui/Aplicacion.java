@@ -7,10 +7,17 @@ package gui;
 
 import bd.Data;
 import bd.DatosConexion;
+import java.awt.event.ActionEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -32,6 +39,7 @@ public class Aplicacion extends javax.swing.JFrame {
     private List<Object> listaBDObj;
     private static final long serialVersionUID = 1L;
     public RSyntaxTextArea txtSentencia;
+    private final JFileChooser fc = new JFileChooser();
 
     public Aplicacion() {
         initComponents();
@@ -95,24 +103,24 @@ public class Aplicacion extends javax.swing.JFrame {
         panelSyntax = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        imNuevo = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        imAbrir = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        imGuardar = new javax.swing.JMenuItem();
+        imGuardarComo = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        imSalir = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        imRehacer = new javax.swing.JMenuItem();
+        imDeshacer = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        imCortar = new javax.swing.JMenuItem();
+        imCopiar = new javax.swing.JMenuItem();
+        imPegar = new javax.swing.JMenuItem();
+        imBorrar = new javax.swing.JMenuItem();
         jSeparator5 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem12 = new javax.swing.JMenuItem();
+        imSeleccionarTodo = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         imGeneradorInsert = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -312,71 +320,66 @@ public class Aplicacion extends javax.swing.JFrame {
 
         jMenu1.setText("Archivo");
 
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevoArchivo.png"))); // NOI18N
-        jMenuItem1.setText("Nuevo");
-        jMenu1.add(jMenuItem1);
+        imNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevoArchivo.png"))); // NOI18N
+        imNuevo.setText("Nuevo");
+        jMenu1.add(imNuevo);
         jMenu1.add(jSeparator1);
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/abrirArchivo.png"))); // NOI18N
-        jMenuItem2.setText("Abrir...");
-        jMenu1.add(jMenuItem2);
+        imAbrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/abrirArchivo.png"))); // NOI18N
+        imAbrir.setText("Abrir...");
+        imAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imAbrirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(imAbrir);
         jMenu1.add(jSeparator2);
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardarArchivo.png"))); // NOI18N
-        jMenuItem3.setText("Guardar");
-        jMenu1.add(jMenuItem3);
+        imGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardarArchivo.png"))); // NOI18N
+        imGuardar.setText("Guardar");
+        jMenu1.add(imGuardar);
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardarArchivo.png"))); // NOI18N
-        jMenuItem4.setText("Guardar como...");
-        jMenu1.add(jMenuItem4);
+        imGuardarComo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardarArchivo.png"))); // NOI18N
+        imGuardarComo.setText("Guardar como...");
+        jMenu1.add(imGuardarComo);
         jMenu1.add(jSeparator3);
 
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
-        jMenuItem5.setText("Salir");
-        jMenu1.add(jMenuItem5);
+        imSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
+        imSalir.setText("Salir");
+        jMenu1.add(imSalir);
 
         menuBar.add(jMenu1);
 
         jMenu3.setText("Editar");
 
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/rehacer.png"))); // NOI18N
-        jMenuItem6.setText("Rehacer");
-        jMenu3.add(jMenuItem6);
+        imRehacer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/rehacer.png"))); // NOI18N
+        imRehacer.setText("Rehacer");
+        jMenu3.add(imRehacer);
 
-        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/deshacer.png"))); // NOI18N
-        jMenuItem7.setText("Deshacer");
-        jMenu3.add(jMenuItem7);
+        imDeshacer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/deshacer.png"))); // NOI18N
+        imDeshacer.setText("Deshacer");
+        jMenu3.add(imDeshacer);
         jMenu3.add(jSeparator4);
 
-        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cortar.png"))); // NOI18N
-        jMenuItem11.setText("Cortar");
-        jMenu3.add(jMenuItem11);
+        imCortar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cortar.png"))); // NOI18N
+        imCortar.setText("Cortar");
+        jMenu3.add(imCortar);
 
-        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/copiar.png"))); // NOI18N
-        jMenuItem8.setText("Copiar");
-        jMenu3.add(jMenuItem8);
+        imCopiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/copiar.png"))); // NOI18N
+        imCopiar.setText("Copiar");
+        jMenu3.add(imCopiar);
 
-        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pegar.png"))); // NOI18N
-        jMenuItem9.setText("Pegar");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem9);
+        imPegar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/pegar.png"))); // NOI18N
+        imPegar.setText("Pegar");
+        jMenu3.add(imPegar);
 
-        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/borrar.png"))); // NOI18N
-        jMenuItem10.setText("Borrar");
-        jMenu3.add(jMenuItem10);
+        imBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/borrar.png"))); // NOI18N
+        imBorrar.setText("Borrar");
+        jMenu3.add(imBorrar);
         jMenu3.add(jSeparator5);
 
-        jMenuItem12.setText("Seleccionar Todo");
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem12);
+        imSeleccionarTodo.setText("Seleccionar Todo");
+        jMenu3.add(imSeleccionarTodo);
 
         menuBar.add(jMenu3);
 
@@ -443,24 +446,21 @@ public class Aplicacion extends javax.swing.JFrame {
                         .addComponent(jScrollPane1)
                         .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnUsarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cboBD, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(8, 8, 8))))
+                                .addComponent(cboBD, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnIniciarSeleccionScript, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnIniciarScriptCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
+                                    .addComponent(btnIniciarScriptCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnUsarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(panelSyntax, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -549,13 +549,9 @@ public class Aplicacion extends javax.swing.JFrame {
         Aplication.main(args);
     }//GEN-LAST:event_imGeneradorInsertActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
-
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
+    private void imAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imAbrirActionPerformed
+        abrirArchivo(evt);
+    }//GEN-LAST:event_imAbrirActionPerformed
     
     /**
      * @param args the command line arguments
@@ -590,7 +586,19 @@ public class Aplicacion extends javax.swing.JFrame {
     private javax.swing.JButton btnSQLServer;
     private javax.swing.JButton btnUsarBD;
     private javax.swing.JComboBox cboBD;
+    private javax.swing.JMenuItem imAbrir;
+    private javax.swing.JMenuItem imBorrar;
+    private javax.swing.JMenuItem imCopiar;
+    private javax.swing.JMenuItem imCortar;
+    private javax.swing.JMenuItem imDeshacer;
     private javax.swing.JMenuItem imGeneradorInsert;
+    private javax.swing.JMenuItem imGuardar;
+    private javax.swing.JMenuItem imGuardarComo;
+    private javax.swing.JMenuItem imNuevo;
+    private javax.swing.JMenuItem imPegar;
+    private javax.swing.JMenuItem imRehacer;
+    private javax.swing.JMenuItem imSalir;
+    private javax.swing.JMenuItem imSeleccionarTodo;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -602,18 +610,6 @@ public class Aplicacion extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JFrame jPortada;
     private javax.swing.JScrollPane jScrollPane1;
@@ -860,5 +856,31 @@ public class Aplicacion extends javax.swing.JFrame {
 
     private void txtSentenciaKeyReleased(java.awt.event.KeyEvent evt) {
         activarBtnIniciarScriptSeleccionado();
+    }
+
+    private void abrirArchivo(ActionEvent evt) {
+        if(evt.getSource() == imAbrir){
+            int returnVal = fc.showOpenDialog(this.panelSyntax);
+            if(returnVal == JFileChooser.APPROVE_OPTION){
+                File file = fc.getSelectedFile();
+                
+                Scanner s = null;
+                try{
+                    s = new Scanner(new BufferedReader(new FileReader(file)));
+                    
+                    String abrir = "";
+                    while(s.hasNextLine()){
+                        abrir = abrir + s.nextLine()+"\n";
+                    }
+                    txtSentencia.setText(abrir);
+                } catch (FileNotFoundException ex) {
+                }finally{
+                    if(s != null){
+                        s.close();
+                    }
+                }
+            }else{
+            }
+        }
     }
 }
