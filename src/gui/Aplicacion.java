@@ -7,17 +7,21 @@ package gui;
 
 import bd.Data;
 import bd.DatosConexion;
+import java.awt.BorderLayout;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import modelo.TMSelect;
-
+import org.fife.ui.rtextarea.*;
+import org.fife.ui.rsyntaxtextarea.*;
 /**
  *
  * @author Alvaro
@@ -28,12 +32,18 @@ public class Aplicacion extends javax.swing.JFrame {
     private Data d;
     private List<String> listaBD;
     private List<Object> listaBDObj;
-
+    private static final long serialVersionUID = 1L;
+    public RSyntaxTextArea txtSentencia;
     public Aplicacion() {
         initComponents();
         this.setVisible(false);
         montarInterfaz();
-
+        txtSentencia = new RSyntaxTextArea(20, 60);
+        txtSentencia.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_SQL);
+        txtSentencia.setCodeFoldingEnabled(true);
+        RTextScrollPane sp = new RTextScrollPane(txtSentencia);
+        panelSyntax.add(sp);
+        
         jInicioSesion.setLocationRelativeTo(null);
         jPortada.setLocationRelativeTo(null);
         this.setLocationRelativeTo(null);
@@ -63,8 +73,6 @@ public class Aplicacion extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         treeBD = new javax.swing.JTree();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtSentencia = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtResultado = new javax.swing.JTextArea();
         btnIniciarSeleccionScript = new javax.swing.JButton();
@@ -76,6 +84,7 @@ public class Aplicacion extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         cboBD = new javax.swing.JComboBox();
         lblContarCaracteres = new javax.swing.JLabel();
+        panelSyntax = new javax.swing.JPanel();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -222,15 +231,6 @@ public class Aplicacion extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(treeBD);
 
-        txtSentencia.setColumns(20);
-        txtSentencia.setRows(5);
-        txtSentencia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSentenciaKeyReleased(evt);
-            }
-        });
-        jScrollPane2.setViewportView(txtSentencia);
-
         txtResultado.setEditable(false);
         txtResultado.setColumns(20);
         txtResultado.setRows(5);
@@ -274,6 +274,8 @@ public class Aplicacion extends javax.swing.JFrame {
         lblContarCaracteres.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblContarCaracteres.setText("0");
 
+        panelSyntax.setLayout(new java.awt.BorderLayout());
+
         jMenu1.setText("File");
         menuBar.add(jMenu1);
 
@@ -291,10 +293,9 @@ public class Aplicacion extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
                     .addComponent(jScrollPane3)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(cboBD, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cboBD, 0, 159, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnUsarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -311,30 +312,31 @@ public class Aplicacion extends javax.swing.JFrame {
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblContarCaracteres, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblContarCaracteres, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelSyntax, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                                .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                                .addComponent(btnIniciarSeleccionScript, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                                .addComponent(btnIniciarScriptCompleto, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                                .addComponent(btnUsarBD, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                                .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                                .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnIniciarSeleccionScript, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnIniciarScriptCompleto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnUsarBD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(cboBD))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelSyntax, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -354,10 +356,6 @@ public class Aplicacion extends javax.swing.JFrame {
     private void btnUsarBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsarBDActionPerformed
         seleccionarBD();
     }//GEN-LAST:event_btnUsarBDActionPerformed
-
-    private void txtSentenciaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSentenciaKeyReleased
-        activarBtnIniciarScriptSeleccionado();
-    }//GEN-LAST:event_txtSentenciaKeyReleased
 
     private void btnIniciarScriptCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarScriptCompletoActionPerformed
         scriptCompleto();
@@ -442,17 +440,16 @@ public class Aplicacion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JFrame jPortada;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JFrame jTabla;
     private javax.swing.JLabel lblContarCaracteres;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JPanel panelSyntax;
     private javax.swing.JTable tabSelect;
     private javax.swing.JTree treeBD;
     private javax.swing.JPasswordField txtClave;
     private javax.swing.JTextArea txtResultado;
-    private javax.swing.JTextArea txtSentencia;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 
