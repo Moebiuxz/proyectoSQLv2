@@ -8,6 +8,8 @@ package gui;
 import bd.Data;
 import bd.DatosConexion;
 import java.awt.BorderLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -19,9 +21,11 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import modelo.TMSelect;
 import org.fife.ui.rtextarea.*;
 import org.fife.ui.rsyntaxtextarea.*;
+
 /**
  *
  * @author Alvaro
@@ -34,9 +38,11 @@ public class Aplicacion extends javax.swing.JFrame {
     private List<Object> listaBDObj;
     private static final long serialVersionUID = 1L;
     public RSyntaxTextArea txtSentencia;
-    
+
     public Aplicacion() {
         initComponents();
+
+        /*Mouse*/
         this.setVisible(false);
         montarInterfaz();
         txtSentencia = new RSyntaxTextArea(20, 60);
@@ -44,13 +50,13 @@ public class Aplicacion extends javax.swing.JFrame {
         txtSentencia.setCodeFoldingEnabled(true);
         RTextScrollPane sp = new RTextScrollPane(txtSentencia);
         panelSyntax.add(sp);
-        
+
         txtSentencia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSentenciaKeyReleased(evt);
             }
         });
-        
+
         jInicioSesion.setLocationRelativeTo(null);
         jPortada.setLocationRelativeTo(null);
         this.setLocationRelativeTo(null);
@@ -231,6 +237,11 @@ public class Aplicacion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        treeBD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                treeBDMouseReleased(evt);
+            }
+        });
         treeBD.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
                 treeBDValueChanged(evt);
@@ -377,6 +388,7 @@ public class Aplicacion extends javax.swing.JFrame {
 
     private void treeBDValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_treeBDValueChanged
         activacionBtnSeleccionarBD();
+
     }//GEN-LAST:event_treeBDValueChanged
 
     private void cboBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboBDActionPerformed
@@ -411,6 +423,30 @@ public class Aplicacion extends javax.swing.JFrame {
     private void panelSyntaxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelSyntaxKeyReleased
 
     }//GEN-LAST:event_panelSyntaxKeyReleased
+
+    private void treeBDMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_treeBDMouseReleased
+        if (evt.getClickCount() == 2) {
+                TreePath[] paths = treeBD.getSelectionPaths();
+                for (TreePath path : paths) {
+                    try {
+                        d = new Data(datos);
+                        System.out.println(path.getLastPathComponent());
+                        String cadena =  path.getLastPathComponent().toString();
+                        cadena = "SELECT * FROM "+cadena;
+                        List<String[]> listaSelect = d.selectBD(cadena);
+                        String[] nombreColumna = listaSelect.get(0);
+                        listaSelect.remove(0);
+                        TMSelect modelo = new TMSelect(listaSelect, datos, nombreColumna);
+                        tabSelect.setModel(modelo);
+                        jTabla.setVisible(true);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Aplicacion.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
+                
+        }
+    }//GEN-LAST:event_treeBDMouseReleased
 
     /**
      * @param args the command line arguments
@@ -481,12 +517,12 @@ public class Aplicacion extends javax.swing.JFrame {
                 raiz.add(bd);
                 List<String> listaTablas = d.showTablas(l);
                 DefaultMutableTreeNode tab = null;
-                for(String lis : listaTablas){
+                for (String lis : listaTablas) {
                     tab = new DefaultMutableTreeNode(lis);
                     bd.add(tab);
                 }
             }
-            
+
             DefaultTreeModel modeloArbol = new DefaultTreeModel(raiz);
             this.treeBD.setModel(modeloArbol);
         } catch (SQLException ex) {
@@ -615,15 +651,14 @@ public class Aplicacion extends javax.swing.JFrame {
 
     private void activacionBtnSeleccionarBD() {
         DefaultMutableTreeNode BDSeleccionada = (DefaultMutableTreeNode) treeBD.getLastSelectedPathComponent();
-
         try {
             if (!BDSeleccionada.isRoot()) {
                 btnUsarBD.setEnabled(true);
             } else {
                 btnUsarBD.setEnabled(false);
             }
-        }catch(NullPointerException ex){
-            
+        } catch (NullPointerException ex) {
+
         }
 
     }
@@ -692,7 +727,8 @@ public class Aplicacion extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
         }
     }
-    private void txtSentenciaKeyReleased(java.awt.event.KeyEvent evt) {                                         
+
+    private void txtSentenciaKeyReleased(java.awt.event.KeyEvent evt) {
         activarBtnIniciarScriptSeleccionado();
-    } 
+    }
 }
