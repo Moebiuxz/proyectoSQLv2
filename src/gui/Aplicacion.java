@@ -44,6 +44,12 @@ public class Aplicacion extends javax.swing.JFrame {
         RTextScrollPane sp = new RTextScrollPane(txtSentencia);
         panelSyntax.add(sp);
         
+        txtSentencia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSentenciaKeyReleased(evt);
+            }
+        });
+        
         jInicioSesion.setLocationRelativeTo(null);
         jPortada.setLocationRelativeTo(null);
         this.setLocationRelativeTo(null);
@@ -274,6 +280,11 @@ public class Aplicacion extends javax.swing.JFrame {
         lblContarCaracteres.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblContarCaracteres.setText("0");
 
+        panelSyntax.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                panelSyntaxKeyReleased(evt);
+            }
+        });
         panelSyntax.setLayout(new java.awt.BorderLayout());
 
         jMenu1.setText("File");
@@ -395,6 +406,10 @@ public class Aplicacion extends javax.swing.JFrame {
         cargarArbol();
         cargarComboBDDespues();
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void panelSyntaxKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelSyntaxKeyReleased
+
+    }//GEN-LAST:event_panelSyntaxKeyReleased
 
     /**
      * @param args the command line arguments
@@ -668,4 +683,7 @@ public class Aplicacion extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
         }
     }
+    private void txtSentenciaKeyReleased(java.awt.event.KeyEvent evt) {                                         
+        activarBtnIniciarScriptSeleccionado();
+    } 
 }
