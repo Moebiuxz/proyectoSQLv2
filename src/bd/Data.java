@@ -27,6 +27,18 @@ public class Data {
         }
         return listaBD;
     }
+    
+    public List<String> showTablas(String l) throws SQLException{
+        List<String> listaTablas = new ArrayList<>();
+        String bd = "USE "+l+";";
+        c.ejecutar(bd);
+        String show = "SHOW TABLES;";
+        c.resultado = c.ejecutarSelect(show);
+        while (c.resultado.next()) {
+            listaTablas.add(c.resultado.getString(1));
+        }
+        return listaTablas;
+    }
 
     public List<Object> mostrarBDObj() throws SQLException {
         List<Object> listaBD = new ArrayList<>();

@@ -34,6 +34,7 @@ public class Aplicacion extends javax.swing.JFrame {
     private List<Object> listaBDObj;
     private static final long serialVersionUID = 1L;
     public RSyntaxTextArea txtSentencia;
+    
     public Aplicacion() {
         initComponents();
         this.setVisible(false);
@@ -474,10 +475,18 @@ public class Aplicacion extends javax.swing.JFrame {
             d = new Data(datos);
             listaBD = d.mostrarBD();
             for (String l : listaBD) {
-                DefaultMutableTreeNode bd = new DefaultMutableTreeNode();
-                bd.setUserObject(l);
+                //DefaultMutableTreeNode bd = new DefaultMutableTreeNode();
+                DefaultMutableTreeNode bd = new DefaultMutableTreeNode(l);
+                //bd.setUserObject(l);
                 raiz.add(bd);
+                List<String> listaTablas = d.showTablas(l);
+                DefaultMutableTreeNode tab = null;
+                for(String lis : listaTablas){
+                    tab = new DefaultMutableTreeNode(lis);
+                    bd.add(tab);
+                }
             }
+            
             DefaultTreeModel modeloArbol = new DefaultTreeModel(raiz);
             this.treeBD.setModel(modeloArbol);
         } catch (SQLException ex) {
