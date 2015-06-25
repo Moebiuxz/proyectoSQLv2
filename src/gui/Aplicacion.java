@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
@@ -76,7 +77,10 @@ public class Aplicacion extends javax.swing.JFrame {
 
         jTabla = new javax.swing.JFrame();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tabSelect = new javax.swing.JTable();
+        tabSelectop = new javax.swing.JTable();
+        btnInsertarFila = new javax.swing.JButton();
+        btnAceptarInsertar = new javax.swing.JButton();
+        btnCancelarInsertar = new javax.swing.JButton();
         jPortada = new javax.swing.JFrame();
         btnMySQL = new javax.swing.JButton();
         btnSQLServer = new javax.swing.JButton();
@@ -87,10 +91,10 @@ public class Aplicacion extends javax.swing.JFrame {
         txtClave = new javax.swing.JPasswordField();
         txtUsuario = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txtServer = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         treeBD = new javax.swing.JTree();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txtResultado = new javax.swing.JTextArea();
         btnIniciarSeleccionScript = new javax.swing.JButton();
         btnIniciarScriptCompleto = new javax.swing.JButton();
         btnUsarBD = new javax.swing.JButton();
@@ -101,6 +105,12 @@ public class Aplicacion extends javax.swing.JFrame {
         cboBD = new javax.swing.JComboBox();
         lblContarCaracteres = new javax.swing.JLabel();
         panelSyntax = new javax.swing.JPanel();
+        panelCompleto = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtResultado = new javax.swing.JTextArea();
+        panelTabla = new javax.swing.JScrollPane();
+        tabSelect = new javax.swing.JTable();
         menuBar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         imNuevo = new javax.swing.JMenuItem();
@@ -126,9 +136,9 @@ public class Aplicacion extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
 
-        jTabla.setMinimumSize(new java.awt.Dimension(451, 192));
+        jTabla.setMinimumSize(new java.awt.Dimension(451, 230));
 
-        tabSelect.setModel(new javax.swing.table.DefaultTableModel(
+        tabSelectop.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -139,23 +149,49 @@ public class Aplicacion extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(tabSelect);
+        jScrollPane4.setViewportView(tabSelectop);
+
+        btnInsertarFila.setText("Insertar");
+        btnInsertarFila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertarFilaActionPerformed(evt);
+            }
+        });
+
+        btnAceptarInsertar.setText("Aceptar");
+        btnAceptarInsertar.setEnabled(false);
+
+        btnCancelarInsertar.setText("Cancelar");
+        btnCancelarInsertar.setEnabled(false);
 
         javax.swing.GroupLayout jTablaLayout = new javax.swing.GroupLayout(jTabla.getContentPane());
         jTabla.getContentPane().setLayout(jTablaLayout);
         jTablaLayout.setHorizontalGroup(
             jTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jTablaLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+                    .addGroup(jTablaLayout.createSequentialGroup()
+                        .addComponent(btnInsertarFila)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAceptarInsertar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelarInsertar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jTablaLayout.setVerticalGroup(
             jTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jTablaLayout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
+            .addGroup(jTablaLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnInsertarFila)
+                    .addComponent(btnAceptarInsertar)
+                    .addComponent(btnCancelarInsertar))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jPortada.setMinimumSize(new java.awt.Dimension(502, 373));
@@ -190,9 +226,10 @@ public class Aplicacion extends javax.swing.JFrame {
                 .addContainerGap(84, Short.MAX_VALUE))
         );
 
-        jInicioSesion.setMinimumSize(new java.awt.Dimension(284, 188));
+        jInicioSesion.setMinimumSize(new java.awt.Dimension(347, 214));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Iniciar sesión"));
+        jPanel1.setMinimumSize(new java.awt.Dimension(327, 182));
 
         jLabel1.setText("Usuario:");
 
@@ -207,39 +244,53 @@ public class Aplicacion extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("Server:");
+
+        txtServer.setText("localhost");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                    .addComponent(txtClave))
-                .addContainerGap(49, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(51, 51, 51)
+                        .addComponent(txtServer))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(112, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtServer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnLogin)
-                .addGap(20, 20, 20))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jInicioSesionLayout = new javax.swing.GroupLayout(jInicioSesion.getContentPane());
@@ -255,8 +306,8 @@ public class Aplicacion extends javax.swing.JFrame {
             jInicioSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInicioSesionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -272,11 +323,6 @@ public class Aplicacion extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(treeBD);
-
-        txtResultado.setEditable(false);
-        txtResultado.setColumns(20);
-        txtResultado.setRows(5);
-        jScrollPane3.setViewportView(txtResultado);
 
         btnIniciarSeleccionScript.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/runSeleccionUP.png"))); // NOI18N
         btnIniciarSeleccionScript.addActionListener(new java.awt.event.ActionListener() {
@@ -317,6 +363,43 @@ public class Aplicacion extends javax.swing.JFrame {
         lblContarCaracteres.setText("0");
 
         panelSyntax.setLayout(new java.awt.BorderLayout());
+
+        txtResultado.setEditable(false);
+        txtResultado.setColumns(20);
+        txtResultado.setRows(5);
+        jScrollPane3.setViewportView(txtResultado);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 546, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 144, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+        );
+
+        panelCompleto.addTab("salida", jPanel2);
+
+        tabSelect.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        panelTabla.setViewportView(tabSelect);
+
+        panelCompleto.addTab("select", panelTabla);
 
         jMenu1.setText("Archivo");
 
@@ -413,11 +496,7 @@ public class Aplicacion extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
                     .addComponent(panelSyntax, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(lblContarCaracteres, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cboBD, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -434,7 +513,11 @@ public class Aplicacion extends javax.swing.JFrame {
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 141, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblContarCaracteres, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelCompleto))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -443,30 +526,25 @@ public class Aplicacion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                         .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(cboBD, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnIniciarSeleccionScript, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnIniciarScriptCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnUsarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(panelSyntax, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnIniciarSeleccionScript, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnIniciarScriptCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUsarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboBD, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelSyntax, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panelCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblContarCaracteres)
-                        .addGap(12, 12, 12))))
+                        .addContainerGap())))
         );
 
         pack();
@@ -507,7 +585,7 @@ public class Aplicacion extends javax.swing.JFrame {
             for (char c : txtClave.getPassword()) {
                 pass = pass + c;
             }
-            datos = new DatosConexion("localhost", "mysql", txtUsuario.getText(), pass);
+            datos = new DatosConexion(txtServer.getText(), "mysql", txtUsuario.getText(), pass);
             d = new Data(datos);
             cargarMySQL();
         } catch (SQLException ex) {
@@ -524,23 +602,24 @@ public class Aplicacion extends javax.swing.JFrame {
 
     private void treeBDMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_treeBDMouseReleased
         if (evt.getClickCount() == 2) {
-                TreePath[] paths = treeBD.getSelectionPaths();
-                for (TreePath path : paths) {
-                    try {
-                        d = new Data(datos);
-                        System.out.println(path.getLastPathComponent());
-                        String cadena =  path.getLastPathComponent().toString();
-                        cadena = "SELECT * FROM "+cadena;
-                        List<String[]> listaSelect = d.selectBD(cadena);
-                        String[] nombreColumna = listaSelect.get(0);
-                        listaSelect.remove(0);
-                        TMSelect modelo = new TMSelect(listaSelect, datos, nombreColumna);
-                        tabSelect.setModel(modelo);
-                        jTabla.setVisible(true);
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Aplicacion.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+            TreePath[] paths = treeBD.getSelectionPaths();
+            for (TreePath path : paths) {
+                try {
+                    d = new Data(datos);
+                    System.out.println(path.getLastPathComponent());
+                    String cadena = path.getLastPathComponent().toString();
+                    cadena = "SELECT * FROM " + cadena;
+                    List<String[]> listaSelect = d.selectBD(cadena);
+                    String[] nombreColumna = listaSelect.get(0);
+                    listaSelect.remove(0);
+                    TMSelect modelo = new TMSelect(listaSelect, datos, nombreColumna);
+                    tabSelect.setModel(modelo);
+                    panelCompleto.setSelectedIndex(1);
+                    //jTabla.setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Aplicacion.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
         }
     }//GEN-LAST:event_treeBDMouseReleased
 
@@ -552,7 +631,11 @@ public class Aplicacion extends javax.swing.JFrame {
     private void imAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imAbrirActionPerformed
         abrirArchivo(evt);
     }//GEN-LAST:event_imAbrirActionPerformed
-    
+
+    private void btnInsertarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarFilaActionPerformed
+        
+    }//GEN-LAST:event_btnInsertarFilaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -578,9 +661,12 @@ public class Aplicacion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptarInsertar;
+    private javax.swing.JButton btnCancelarInsertar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnIniciarScriptCompleto;
     private javax.swing.JButton btnIniciarSeleccionScript;
+    private javax.swing.JButton btnInsertarFila;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnMySQL;
     private javax.swing.JButton btnSQLServer;
@@ -605,12 +691,14 @@ public class Aplicacion extends javax.swing.JFrame {
     private javax.swing.JFrame jInicioSesion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JFrame jPortada;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
@@ -623,11 +711,15 @@ public class Aplicacion extends javax.swing.JFrame {
     private javax.swing.JFrame jTabla;
     private javax.swing.JLabel lblContarCaracteres;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JTabbedPane panelCompleto;
     private javax.swing.JPanel panelSyntax;
+    private javax.swing.JScrollPane panelTabla;
     private javax.swing.JTable tabSelect;
+    private javax.swing.JTable tabSelectop;
     private javax.swing.JTree treeBD;
     private javax.swing.JPasswordField txtClave;
     private javax.swing.JTextArea txtResultado;
+    private javax.swing.JTextField txtServer;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 
@@ -706,7 +798,8 @@ public class Aplicacion extends javax.swing.JFrame {
                 listaSelect.remove(0);
                 TMSelect modelo = new TMSelect(listaSelect, datos, nombreColumna);
                 tabSelect.setModel(modelo);
-                jTabla.setVisible(true);
+                panelCompleto.setSelectedIndex(1);
+                //jTabla.setVisible(true);
             } else if (consulta[0].equalsIgnoreCase("show") && consulta[1].equalsIgnoreCase("tables;")) {
                 String tablas = d.mostrarTablas(cadena);
                 txtResultado.setText(tablas);
@@ -756,7 +849,8 @@ public class Aplicacion extends javax.swing.JFrame {
                 listaSelect.remove(0);
                 TMSelect modelo = new TMSelect(listaSelect, datos, nombreColumna);
                 tabSelect.setModel(modelo);
-                jTabla.setVisible(true);
+                panelCompleto.setSelectedIndex(1);
+                //jTabla.setVisible(true);
             } else if (consulta[0].equalsIgnoreCase("show") && consulta[1].equalsIgnoreCase("tables;")) {
                 String tablas = d.mostrarTablas(cadena);
                 txtResultado.setText(tablas);
@@ -859,27 +953,27 @@ public class Aplicacion extends javax.swing.JFrame {
     }
 
     private void abrirArchivo(ActionEvent evt) {
-        if(evt.getSource() == imAbrir){
+        if (evt.getSource() == imAbrir) {
             int returnVal = fc.showOpenDialog(this.panelSyntax);
-            if(returnVal == JFileChooser.APPROVE_OPTION){
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
-                
+
                 Scanner s = null;
-                try{
+                try {
                     s = new Scanner(new BufferedReader(new FileReader(file)));
-                    
+
                     String abrir = "";
-                    while(s.hasNextLine()){
-                        abrir = abrir + s.nextLine()+"\n";
+                    while (s.hasNextLine()) {
+                        abrir = abrir + s.nextLine() + "\n";
                     }
                     txtSentencia.setText(abrir);
                 } catch (FileNotFoundException ex) {
-                }finally{
-                    if(s != null){
+                } finally {
+                    if (s != null) {
                         s.close();
                     }
                 }
-            }else{
+            } else {
             }
         }
     }
