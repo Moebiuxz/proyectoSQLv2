@@ -211,14 +211,19 @@ public class Aplicacion extends javax.swing.JFrame {
         jPortada.setIconImage(getIconImage());
         jPortada.setMinimumSize(new java.awt.Dimension(502, 373));
 
-        btnMySQL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/MySQL.png.png"))); // NOI18N
+        btnMySQL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/mysql-panchito.png"))); // NOI18N
         btnMySQL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMySQLActionPerformed(evt);
             }
         });
 
-        btnSQLServer.setText("SQLSERVER");
+        btnSQLServer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/sql-server-panchito.png"))); // NOI18N
+        btnSQLServer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSQLServerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPortadaLayout = new javax.swing.GroupLayout(jPortada.getContentPane());
         jPortada.getContentPane().setLayout(jPortadaLayout);
@@ -394,15 +399,15 @@ public class Aplicacion extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGap(0, 23, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 144, Short.MAX_VALUE)
+            .addGap(0, 23, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
         );
 
         panelCompleto.addTab("salida", jPanel2);
@@ -538,7 +543,7 @@ public class Aplicacion extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblContarCaracteres, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelCompleto))
+                    .addComponent(panelCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -547,7 +552,7 @@ public class Aplicacion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -656,6 +661,10 @@ public class Aplicacion extends javax.swing.JFrame {
     private void btnInsertarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarFilaActionPerformed
 
     }//GEN-LAST:event_btnInsertarFilaActionPerformed
+
+    private void btnSQLServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSQLServerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSQLServerActionPerformed
 
     /**
      * @param args the command line arguments
