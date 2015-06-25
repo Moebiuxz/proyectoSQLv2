@@ -303,6 +303,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="imNuevoActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
             </MenuItem>
@@ -344,6 +347,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="imSalirActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -489,14 +495,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnRehacer" min="-2" pref="24" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton8" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="btnReiniciarHoja" min="-2" pref="24" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="lblContarCaracteres" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="panelCompleto" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="panelCompleto" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -508,7 +514,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="448" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -516,7 +522,7 @@
                           <Component id="btnEliminar" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="btnRehacer" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="btnDeshacer" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="jButton8" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="btnReiniciarHoja" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="btnIniciarSeleccionScript" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="btnIniciarScriptCompleto" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="btnUsarBD" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
@@ -595,7 +601,15 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton8">
+    <Component class="javax.swing.JButton" name="btnReiniciarHoja">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/imagenes/reiniciarHoja.png"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReiniciarHojaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnEliminar">
       <Properties>
@@ -648,17 +662,17 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="488" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane3" alignment="0" pref="23" max="32767" attributes="0"/>
+                      <Component id="jScrollPane3" alignment="0" pref="488" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="113" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane3" alignment="0" pref="23" max="32767" attributes="0"/>
+                      <Component id="jScrollPane3" alignment="0" pref="113" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

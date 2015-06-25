@@ -10,6 +10,7 @@ import bd.DatosConexion;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -72,6 +73,12 @@ public class Aplicacion extends javax.swing.JFrame {
                 txtSentenciaKeyReleased(evt);
                 contarCaracteres(evt);
             }
+
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == KeyEvent.VK_F5) {
+                    btnIniciarScriptCompletoActionPerformed(null);
+                }
+            }
         });
 
         jInicioSesion.setLocationRelativeTo(null);
@@ -113,7 +120,7 @@ public class Aplicacion extends javax.swing.JFrame {
         btnUsarBD = new javax.swing.JButton();
         btnRehacer = new javax.swing.JButton();
         btnDeshacer = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        btnReiniciarHoja = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         cboBD = new javax.swing.JComboBox();
         lblContarCaracteres = new javax.swing.JLabel();
@@ -371,6 +378,13 @@ public class Aplicacion extends javax.swing.JFrame {
 
         btnDeshacer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/deshacer16.png"))); // NOI18N
 
+        btnReiniciarHoja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/reiniciarHoja.png"))); // NOI18N
+        btnReiniciarHoja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReiniciarHojaActionPerformed(evt);
+            }
+        });
+
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminarBDUP.png"))); // NOI18N
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -399,15 +413,15 @@ public class Aplicacion extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 23, Short.MAX_VALUE)
+            .addGap(0, 488, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 23, Short.MAX_VALUE)
+            .addGap(0, 113, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
         );
 
         panelCompleto.addTab("salida", jPanel2);
@@ -431,6 +445,11 @@ public class Aplicacion extends javax.swing.JFrame {
 
         imNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/nuevoArchivo.png"))); // NOI18N
         imNuevo.setText("Nuevo");
+        imNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imNuevoActionPerformed(evt);
+            }
+        });
         jMenu1.add(imNuevo);
         jMenu1.add(jSeparator1);
 
@@ -455,6 +474,11 @@ public class Aplicacion extends javax.swing.JFrame {
 
         imSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/salir.png"))); // NOI18N
         imSalir.setText("Salir");
+        imSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imSalirActionPerformed(evt);
+            }
+        });
         jMenu1.add(imSalir);
 
         menuBar.add(jMenu1);
@@ -538,12 +562,12 @@ public class Aplicacion extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRehacer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnReiniciarHoja, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblContarCaracteres, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(panelCompleto))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -552,14 +576,14 @@ public class Aplicacion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                         .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnRehacer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnDeshacer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReiniciarHoja, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnIniciarSeleccionScript, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnIniciarScriptCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnUsarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -666,6 +690,18 @@ public class Aplicacion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSQLServerActionPerformed
 
+    private void btnReiniciarHojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarHojaActionPerformed
+        hojaEnBlanco();
+    }//GEN-LAST:event_btnReiniciarHojaActionPerformed
+
+    private void imNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imNuevoActionPerformed
+        btnReiniciarHojaActionPerformed(evt);
+    }//GEN-LAST:event_imNuevoActionPerformed
+
+    private void imSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imSalirActionPerformed
+        salir();
+    }//GEN-LAST:event_imSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -701,6 +737,7 @@ public class Aplicacion extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnMySQL;
     private javax.swing.JButton btnRehacer;
+    private javax.swing.JButton btnReiniciarHoja;
     private javax.swing.JButton btnSQLServer;
     private javax.swing.JButton btnUsarBD;
     private javax.swing.JComboBox cboBD;
@@ -717,7 +754,6 @@ public class Aplicacion extends javax.swing.JFrame {
     private javax.swing.JMenuItem imRehacer;
     private javax.swing.JMenuItem imSalir;
     private javax.swing.JMenuItem imSeleccionarTodo;
-    private javax.swing.JButton jButton8;
     private javax.swing.JFrame jInicioSesion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -866,7 +902,9 @@ public class Aplicacion extends javax.swing.JFrame {
                 d.actualizarDatos(cadena);
                 txtResultado.setText("Dato(s) actualizado(s) ok.");
             } else if (consulta[0].equalsIgnoreCase("use")) {
+                cadena = cadena.replaceAll(";", "");
                 d.usarBDLista(cadena);
+                consulta[1] = consulta[1].replaceAll(";", "");
                 cboBD.getModel().setSelectedItem(consulta[1]);
                 txtResultado.setText("BD cambiada..");
             }
@@ -916,6 +954,12 @@ public class Aplicacion extends javax.swing.JFrame {
             } else if (consulta[0].equalsIgnoreCase("update")) {
                 d.actualizarDatos(cadena);
                 txtResultado.setText("Dato(s) actualizado(s) ok.");
+            } else if (consulta[0].equalsIgnoreCase("use")) {
+                cadena = cadena.replaceAll(";", "");
+                d.usarBDLista(cadena);
+                consulta[1] = consulta[1].replaceAll(";", "");
+                cboBD.getModel().setSelectedItem(consulta[1]);
+                txtResultado.setText("BD cambiada..");
             }
         } catch (SQLException ex) {
             txtResultado.setText(ex.getMessage());
@@ -1063,5 +1107,27 @@ public class Aplicacion extends javax.swing.JFrame {
                 getImage(ClassLoader.getSystemResource("imagenes/iconoPrincipal.png"));
 
         return retValue;
+    }
+
+    private void hojaEnBlanco() {
+        ImageIcon icon = new ImageIcon(getClass().getResource("../imagenes/confirmacion.png"));
+
+        int opcion = JOptionPane.showConfirmDialog(this, "Desea Iniciar el área de Programación", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
+
+        if (opcion == 0) {
+            txtSentencia.setText("");
+        } else {
+        }
+    }
+
+    private void salir() {
+        ImageIcon icon = new ImageIcon(getClass().getResource("../imagenes/confirmacion.png"));
+
+        int opcion = JOptionPane.showConfirmDialog(this, "¿Desea Cerrar El Programa?", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
+
+        if (opcion == 0) {
+            System.exit(0);
+        } else {
+        }
     }
 }
