@@ -77,6 +77,8 @@ public class Aplicacion extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_F5) {
                     btnIniciarScriptCompletoActionPerformed(null);
+                }if(evt.getKeyCode() == KeyEvent.VK_F6){
+                    btnEliminarActionPerformed(null);
                 }
             }
         });
@@ -137,7 +139,6 @@ public class Aplicacion extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         imAbrir = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        imGuardar = new javax.swing.JMenuItem();
         imGuardarComo = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         imSalir = new javax.swing.JMenuItem();
@@ -154,7 +155,9 @@ public class Aplicacion extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         imGeneradorInsert = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator6 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         jTabla.setIconImage(getIconImage());
         jTabla.setMinimumSize(new java.awt.Dimension(451, 230));
@@ -463,10 +466,6 @@ public class Aplicacion extends javax.swing.JFrame {
         jMenu1.add(imAbrir);
         jMenu1.add(jSeparator2);
 
-        imGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardarArchivo.png"))); // NOI18N
-        imGuardar.setText("Guardar");
-        jMenu1.add(imGuardar);
-
         imGuardarComo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardarArchivo.png"))); // NOI18N
         imGuardarComo.setText("Guardar como...");
         jMenu1.add(imGuardarComo);
@@ -530,10 +529,29 @@ public class Aplicacion extends javax.swing.JFrame {
         menuBar.add(jMenu2);
 
         jMenu4.setText("Ejecutar");
-        menuBar.add(jMenu4);
 
-        jMenu5.setText("Ayuda");
-        menuBar.add(jMenu5);
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/runAllUP.png"))); // NOI18N
+        jMenuItem1.setText("Ejecutar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem1);
+        jMenu4.add(jSeparator6);
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/borrar.png"))); // NOI18N
+        jMenuItem3.setText("Borrar BD Actual");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem3);
+
+        menuBar.add(jMenu4);
 
         setJMenuBar(menuBar);
 
@@ -702,6 +720,14 @@ public class Aplicacion extends javax.swing.JFrame {
         salir();
     }//GEN-LAST:event_imSalirActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        btnIniciarScriptCompletoActionPerformed(evt);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        btnEliminarActionPerformed(evt);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -747,7 +773,6 @@ public class Aplicacion extends javax.swing.JFrame {
     private javax.swing.JMenuItem imCortar;
     private javax.swing.JMenuItem imDeshacer;
     private javax.swing.JMenuItem imGeneradorInsert;
-    private javax.swing.JMenuItem imGuardar;
     private javax.swing.JMenuItem imGuardarComo;
     private javax.swing.JMenuItem imNuevo;
     private javax.swing.JMenuItem imPegar;
@@ -762,7 +787,8 @@ public class Aplicacion extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JFrame jPortada;
@@ -774,6 +800,7 @@ public class Aplicacion extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPopupMenu.Separator jSeparator5;
+    private javax.swing.JPopupMenu.Separator jSeparator6;
     private javax.swing.JFrame jTabla;
     private javax.swing.JLabel lblContarCaracteres;
     private javax.swing.JMenuBar menuBar;
@@ -1091,8 +1118,8 @@ public class Aplicacion extends javax.swing.JFrame {
 
     private void toolTipBotones() {
         btnUsarBD.setToolTipText("Seleccionar Base De Datos");
-        btnEliminar.setToolTipText("Eliminr Base De Datos Seleccionada");
-        btnIniciarScriptCompleto.setToolTipText("Ejecutar Código");
+        btnEliminar.setToolTipText("Eliminr Base De Datos Seleccionada (F6)");
+        btnIniciarScriptCompleto.setToolTipText("Ejecutar Código (F5)");
         btnIniciarSeleccionScript.setToolTipText("Ejecutar Fracción De Código");
         cboBD.setToolTipText("Base De Datos");
         btnMySQL.setToolTipText("MySQL");
@@ -1116,6 +1143,7 @@ public class Aplicacion extends javax.swing.JFrame {
 
         if (opcion == 0) {
             txtSentencia.setText("");
+            txtResultado.setText("");
         } else {
         }
     }
