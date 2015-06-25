@@ -12,9 +12,11 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -77,7 +79,8 @@ public class Aplicacion extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == KeyEvent.VK_F5) {
                     btnIniciarScriptCompletoActionPerformed(null);
-                }if(evt.getKeyCode() == KeyEvent.VK_F6){
+                }
+                if (evt.getKeyCode() == KeyEvent.VK_F6) {
                     btnEliminarActionPerformed(null);
                 }
             }
@@ -468,6 +471,11 @@ public class Aplicacion extends javax.swing.JFrame {
 
         imGuardarComo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardarArchivo.png"))); // NOI18N
         imGuardarComo.setText("Guardar como...");
+        imGuardarComo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imGuardarComoActionPerformed(evt);
+            }
+        });
         jMenu1.add(imGuardarComo);
         jMenu1.add(jSeparator3);
 
@@ -727,6 +735,33 @@ public class Aplicacion extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         btnEliminarActionPerformed(evt);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void imGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imGuardarComoActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        String ruta = "";
+        try {
+            if (chooser.showSaveDialog(null) == chooser.APPROVE_OPTION) {
+                ruta = chooser.getSelectedFile().getAbsolutePath();
+                ruta = ruta + ".sql";
+                FileWriter fw;
+                fw = new FileWriter(ruta);
+                BufferedWriter buffer = new BufferedWriter(fw);
+                buffer.write(txtSentencia.getText());
+                buffer.newLine();
+                buffer.close();
+//                Properties archivoProp = new Properties();
+//                FileOutputStream fos = new FileOutputStream(ruta);
+//                int cont=1;
+//                for (Propiedad l : lista) {
+//                    archivoProp.put(l.getKey(), l.getValue());
+//                }
+//                archivoProp.store(fos, "Propiedades");
+                JOptionPane.showMessageDialog(this, "Archivo guardado!!!");
+            }
+        } catch (Exception ex) {
+            System.out.println("Error");
+        }
+    }//GEN-LAST:event_imGuardarComoActionPerformed
 
     /**
      * @param args the command line arguments
