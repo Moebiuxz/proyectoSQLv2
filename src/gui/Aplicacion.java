@@ -7,6 +7,8 @@ package gui;
 
 import bd.Data;
 import bd.DatosConexion;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,9 +21,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
@@ -54,9 +56,8 @@ public class Aplicacion extends javax.swing.JFrame {
 
     public Aplicacion() {
         initComponents();
-        
+
         /*Prueba de iconos*/
-        
         /*Mouse*/
         this.setVisible(false);
         montarInterfaz();
@@ -110,8 +111,8 @@ public class Aplicacion extends javax.swing.JFrame {
         btnIniciarSeleccionScript = new javax.swing.JButton();
         btnIniciarScriptCompleto = new javax.swing.JButton();
         btnUsarBD = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btnRehacer = new javax.swing.JButton();
+        btnDeshacer = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         cboBD = new javax.swing.JComboBox();
@@ -148,6 +149,7 @@ public class Aplicacion extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
 
+        jTabla.setIconImage(getIconImage());
         jTabla.setMinimumSize(new java.awt.Dimension(451, 230));
 
         tabSelectop.setModel(new javax.swing.table.DefaultTableModel(
@@ -206,6 +208,7 @@ public class Aplicacion extends javax.swing.JFrame {
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
+        jPortada.setIconImage(getIconImage());
         jPortada.setMinimumSize(new java.awt.Dimension(502, 373));
 
         btnMySQL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/MySQL.png.png"))); // NOI18N
@@ -238,6 +241,7 @@ public class Aplicacion extends javax.swing.JFrame {
                 .addContainerGap(84, Short.MAX_VALUE))
         );
 
+        jInicioSesion.setIconImage(getIconImage());
         jInicioSesion.setMinimumSize(new java.awt.Dimension(347, 214));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Iniciar sesión"));
@@ -323,6 +327,7 @@ public class Aplicacion extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
 
         treeBD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
@@ -357,6 +362,10 @@ public class Aplicacion extends javax.swing.JFrame {
             }
         });
 
+        btnRehacer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/rehacer16.png"))); // NOI18N
+
+        btnDeshacer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/deshacer16.png"))); // NOI18N
+
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminarBDUP.png"))); // NOI18N
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,9 +394,9 @@ public class Aplicacion extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 546, Short.MAX_VALUE)
+            .addGap(0, 489, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -505,7 +514,7 @@ public class Aplicacion extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelSyntax, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -520,9 +529,9 @@ public class Aplicacion extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnIniciarSeleccionScript, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnDeshacer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRehacer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -543,8 +552,8 @@ public class Aplicacion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRehacer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDeshacer, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnIniciarSeleccionScript, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnIniciarScriptCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -675,12 +684,14 @@ public class Aplicacion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptarInsertar;
     private javax.swing.JButton btnCancelarInsertar;
+    private javax.swing.JButton btnDeshacer;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnIniciarScriptCompleto;
     private javax.swing.JButton btnIniciarSeleccionScript;
     private javax.swing.JButton btnInsertarFila;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnMySQL;
+    private javax.swing.JButton btnRehacer;
     private javax.swing.JButton btnSQLServer;
     private javax.swing.JButton btnUsarBD;
     private javax.swing.JComboBox cboBD;
@@ -697,8 +708,6 @@ public class Aplicacion extends javax.swing.JFrame {
     private javax.swing.JMenuItem imRehacer;
     private javax.swing.JMenuItem imSalir;
     private javax.swing.JMenuItem imSeleccionarTodo;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JFrame jInicioSesion;
     private javax.swing.JLabel jLabel1;
@@ -737,12 +746,12 @@ public class Aplicacion extends javax.swing.JFrame {
 
     private void cargarArbol() {
         try {
-            treeBD.setCellRenderer( new MyTreeCellRenderer());
-            
+            treeBD.setCellRenderer(new MyTreeCellRenderer());
+
             Root mysql = new Root();
             mysql.setNombre("MySQL");
             mysql.setIcon(rootIcon);
-            
+
             //DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("MySQL");
             d = new Data(datos);
             listaBD = d.mostrarBD();
@@ -767,16 +776,16 @@ public class Aplicacion extends javax.swing.JFrame {
             /*Raiz*/
             DefaultMutableTreeNode root = new DefaultMutableTreeNode(mysql);
             /*Bds*/
-            for(DB bd : mysql.getBds()){
-                DefaultMutableTreeNode bdsNode = new DefaultMutableTreeNode( bd );
+            for (DB bd : mysql.getBds()) {
+                DefaultMutableTreeNode bdsNode = new DefaultMutableTreeNode(bd);
                 /*Tablas*/
-                for(Tabla t : bd.getTablas()){
-                    DefaultMutableTreeNode tablaNode = new DefaultMutableTreeNode( t );
+                for (Tabla t : bd.getTablas()) {
+                    DefaultMutableTreeNode tablaNode = new DefaultMutableTreeNode(t);
                     bdsNode.add(tablaNode);
                 }
                 root.add(bdsNode);
             }
-            DefaultTreeModel modelo = new DefaultTreeModel( root );
+            DefaultTreeModel modelo = new DefaultTreeModel(root);
             treeBD.setModel(modelo);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -926,6 +935,14 @@ public class Aplicacion extends javax.swing.JFrame {
     private void montarInterfaz() {
         this.setVisible(false);
         jPortada.setVisible(true);
+
+        /*Títulos*/
+        this.setTitle("SF");
+        jInicioSesion.setTitle("Autenticación");
+        jTabla.setTitle("Visualización Tabla");
+        jPortada.setTitle("Selección");
+
+        toolTipBotones();
     }
 
     private void cargarMySQL() {
@@ -938,12 +955,18 @@ public class Aplicacion extends javax.swing.JFrame {
     }
 
     private void eliminarBD() {
+        ImageIcon icon = new ImageIcon(getClass().getResource("../imagenes/confirmacion.png"));
         try {
             String BDSeleccionada = cboBD.getModel().getSelectedItem().toString();
 
-            d.eliminarBD(BDSeleccionada);
+            int opcion = JOptionPane.showConfirmDialog(this, "Desea Eliminar La BD [" + BDSeleccionada + "]", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon);
+            /*si = 0, no = 1*/
+            if (opcion == 0) {
+                d.eliminarBD(BDSeleccionada);
+            } else {
+            }
         } catch (SQLException ex) {
-            Logger.getLogger(Aplicacion.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -1011,5 +1034,25 @@ public class Aplicacion extends javax.swing.JFrame {
             } else {
             }
         }
+    }
+
+    private void toolTipBotones() {
+        btnUsarBD.setToolTipText("Seleccionar Base De Datos");
+        btnEliminar.setToolTipText("Eliminr Base De Datos Seleccionada");
+        btnIniciarScriptCompleto.setToolTipText("Ejecutar Código");
+        btnIniciarSeleccionScript.setToolTipText("Ejecutar Fracción De Código");
+        cboBD.setToolTipText("Base De Datos");
+        btnMySQL.setToolTipText("MySQL");
+        btnSQLServer.setToolTipText("SQLServer");
+        btnDeshacer.setToolTipText("Deshacer");
+        btnRehacer.setToolTipText("Rehacer");
+    }
+
+    @Override
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().
+                getImage(ClassLoader.getSystemResource("imagenes/iconoPrincipal.png"));
+
+        return retValue;
     }
 }
