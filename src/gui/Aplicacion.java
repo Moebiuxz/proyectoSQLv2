@@ -37,7 +37,6 @@ import modelo.TMSelect;
 import modelo.Tabla;
 import org.fife.ui.rtextarea.*;
 import org.fife.ui.rsyntaxtextarea.*;
-
 /**
  *
  * @author Alvaro
@@ -108,7 +107,6 @@ public class Aplicacion extends javax.swing.JFrame {
         btnCancelarInsertar = new javax.swing.JButton();
         jPortada = new javax.swing.JFrame();
         btnMySQL = new javax.swing.JButton();
-        btnSQLServer = new javax.swing.JButton();
         jInicioSesion = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -231,32 +229,21 @@ public class Aplicacion extends javax.swing.JFrame {
             }
         });
 
-        btnSQLServer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/sql-server-panchito.png"))); // NOI18N
-        btnSQLServer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSQLServerActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPortadaLayout = new javax.swing.GroupLayout(jPortada.getContentPane());
         jPortada.getContentPane().setLayout(jPortadaLayout);
         jPortadaLayout.setHorizontalGroup(
             jPortadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPortadaLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(btnMySQL)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addComponent(btnSQLServer, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+                .addGap(115, 115, 115)
+                .addComponent(btnMySQL, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         jPortadaLayout.setVerticalGroup(
             jPortadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPortadaLayout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addGroup(jPortadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSQLServer, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMySQL))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addComponent(btnMySQL, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jInicioSesion.setIconImage(getIconImage());
@@ -419,15 +406,15 @@ public class Aplicacion extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
+            .addGap(0, 23, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 113, Short.MAX_VALUE)
+            .addGap(0, 23, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
         );
 
         panelCompleto.addTab("salida", jPanel2);
@@ -593,7 +580,7 @@ public class Aplicacion extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblContarCaracteres, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelCompleto))
+                    .addComponent(panelCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -602,7 +589,7 @@ public class Aplicacion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -712,10 +699,6 @@ public class Aplicacion extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnInsertarFilaActionPerformed
 
-    private void btnSQLServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSQLServerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnSQLServerActionPerformed
-
     private void btnReiniciarHojaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarHojaActionPerformed
         hojaEnBlanco();
     }//GEN-LAST:event_btnReiniciarHojaActionPerformed
@@ -799,7 +782,6 @@ public class Aplicacion extends javax.swing.JFrame {
     private javax.swing.JButton btnMySQL;
     private javax.swing.JButton btnRehacer;
     private javax.swing.JButton btnReiniciarHoja;
-    private javax.swing.JButton btnSQLServer;
     private javax.swing.JButton btnUsarBD;
     private javax.swing.JComboBox cboBD;
     private javax.swing.JMenuItem imAbrir;
@@ -1158,7 +1140,6 @@ public class Aplicacion extends javax.swing.JFrame {
         btnIniciarSeleccionScript.setToolTipText("Ejecutar Fracción De Código");
         cboBD.setToolTipText("Base De Datos");
         btnMySQL.setToolTipText("MySQL");
-        btnSQLServer.setToolTipText("SQLServer");
         btnDeshacer.setToolTipText("Deshacer");
         btnRehacer.setToolTipText("Rehacer");
     }
