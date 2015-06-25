@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -24,7 +25,11 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
+import modelo.DB;
+import modelo.MyTreeCellRenderer;
+import modelo.Root;
 import modelo.TMSelect;
+import modelo.Tabla;
 import org.fife.ui.rtextarea.*;
 import org.fife.ui.rsyntaxtextarea.*;
 
@@ -42,9 +47,16 @@ public class Aplicacion extends javax.swing.JFrame {
     public RSyntaxTextArea txtSentencia;
     private final JFileChooser fc = new JFileChooser();
 
+    /*Iconos*/
+    private ImageIcon rootIcon = new ImageIcon(getClass().getResource("/imagenes/icon_mysql.png"));
+    private ImageIcon BDIcon = new ImageIcon(getClass().getResource("/imagenes/icon_database.png"));
+    private ImageIcon TablaIcon = new ImageIcon(getClass().getResource("/imagenes/icon_table.png"));
+
     public Aplicacion() {
         initComponents();
-
+        
+        /*Prueba de iconos*/
+        
         /*Mouse*/
         this.setVisible(false);
         montarInterfaz();
@@ -633,7 +645,7 @@ public class Aplicacion extends javax.swing.JFrame {
     }//GEN-LAST:event_imAbrirActionPerformed
 
     private void btnInsertarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarFilaActionPerformed
-        
+
     }//GEN-LAST:event_btnInsertarFilaActionPerformed
 
     /**
@@ -725,24 +737,47 @@ public class Aplicacion extends javax.swing.JFrame {
 
     private void cargarArbol() {
         try {
-            DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("MySQL");
+            treeBD.setCellRenderer( new MyTreeCellRenderer());
+            
+            Root mysql = new Root();
+            mysql.setNombre("MySQL");
+            mysql.setIcon(rootIcon);
+            
+            //DefaultMutableTreeNode raiz = new DefaultMutableTreeNode("MySQL");
             d = new Data(datos);
             listaBD = d.mostrarBD();
             for (String l : listaBD) {
-                //DefaultMutableTreeNode bd = new DefaultMutableTreeNode();
-                DefaultMutableTreeNode bd = new DefaultMutableTreeNode(l);
-                //bd.setUserObject(l);
-                raiz.add(bd);
+//                DefaultMutableTreeNode bd = new DefaultMutableTreeNode(l);
+//                raiz.add(bd);
+                DB bd = new DB();
+                bd.setNombre(l);
+                bd.setIcon(BDIcon);
                 List<String> listaTablas = d.showTablas(l);
-                DefaultMutableTreeNode tab = null;
+                //DefaultMutableTreeNode tab = null;
                 for (String lis : listaTablas) {
-                    tab = new DefaultMutableTreeNode(lis);
-                    bd.add(tab);
+                    //tab = new DefaultMutableTreeNode(lis);
+                    //bd.add(tab);
+                    Tabla tabla = new Tabla();
+                    tabla.setNombre(lis);
+                    tabla.setIcon(TablaIcon);
+                    bd.addTabla(tabla);
                 }
+                mysql.addBD(bd);
             }
-
-            DefaultTreeModel modeloArbol = new DefaultTreeModel(raiz);
-            this.treeBD.setModel(modeloArbol);
+            /*Raiz*/
+            DefaultMutableTreeNode root = new DefaultMutableTreeNode(mysql);
+            /*Bds*/
+            for(DB bd : mysql.getBds()){
+                DefaultMutableTreeNode bdsNode = new DefaultMutableTreeNode( bd );
+                /*Tablas*/
+                for(Tabla t : bd.getTablas()){
+                    DefaultMutableTreeNode tablaNode = new DefaultMutableTreeNode( t );
+                    bdsNode.add(tablaNode);
+                }
+                root.add(bdsNode);
+            }
+            DefaultTreeModel modelo = new DefaultTreeModel( root );
+            treeBD.setModel(modelo);
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
